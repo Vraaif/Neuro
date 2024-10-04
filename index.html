@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3 Edizione Neuro Festival</title>
+    <title>Modulo di Invio Musica</title>
     <style>
         body {
             background-color: #1a1a1a;
@@ -71,32 +71,32 @@
 </head>
 <body>
     <div class="form-container">
-        <h2>Music Submission</h2>
+        <h2>Invio Musica</h2>
         <form id="musicForm" enctype="multipart/form-data">
-            <label for="twitchNickname">Twitch Nickname:</label>
-            <input type="text" id="twitchNickname" name="twitchNickname" placeholder="Your Twitch Nickname" required>
+            <label for="twitchNickname">Nickname Twitch:</label>
+            <input type="text" id="twitchNickname" name="twitchNickname" placeholder="Il tuo Nickname Twitch" required>
 
-            <label for="titleSong">Title Song:</label>
-            <input type="text" id="titleSong" name="titleSong" placeholder="Song Title" required>
+            <label for="titleSong">Titolo Canzone:</label>
+            <input type="text" id="titleSong" name="titleSong" placeholder="Titolo della Canzone" required>
 
-            <label for="info">Info:</label>
-            <textarea id="info" name="info" rows="4" placeholder="Song Information" required></textarea>
+            <label for="info">Informazioni:</label>
+            <textarea id="info" name="info" rows="4" placeholder="Informazioni sulla Canzone" required></textarea>
 
-            <label for="cover">Upload Cover (Optional):</label>
+            <label for="cover">Carica Copertina (Opzionale):</label>
             <input type="file" id="cover" name="cover" accept="image/*">
 
-            <label for="video">Upload Video:</label>
+            <label for="video">Carica Video:</label>
             <input type="file" id="video" name="video" accept="video/*" required>
 
-            <input type="submit" value="Submit">
+            <input type="submit" value="Invia">
         </form>
-        <div class="info-text">Submit your song details and video!</div>
+        <div class="info-text">Invia i dettagli della tua canzone e il video!</div>
     </div>
 
     <script>
         const form = document.getElementById('musicForm');
 
-        // Function to convert file to Base64
+        // Funzione per convertire il file in Base64
         function getBase64(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -117,7 +117,7 @@
             let coverBase64 = '';
             let videoBase64 = '';
 
-            // Get files and convert to Base64
+            // Ottieni i file e convertili in Base64
             const coverFile = document.getElementById('cover').files[0];
             const videoFile = document.getElementById('video').files[0];
 
@@ -148,12 +148,12 @@
                 });
 
                 if (response.ok) {
-                    alert('Form successfully submitted!');
+                    alert('Modulo inviato con successo!');
                 } else {
-                    alert('Error submitting the form.');
+                    alert('Errore nell\'invio del modulo.');
                 }
             } catch (error) {
-                alert('Error: ' + error.message);
+                alert('Errore: ' + error.message);
             }
         });
     </script>

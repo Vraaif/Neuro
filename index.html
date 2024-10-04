@@ -1,37 +1,129 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modulo di Caricamento Musicale</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <title>Music Submission Form</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #2d2d2d;
+            border-radius: 10px;
+            padding: 20px;
+            width: 400px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            transition: box-shadow 0.3s ease;
+        }
+        .form-container:hover {
+            box-shadow: 0 0 15px rgba(255, 0, 100, 0.7);
+        }
+        h2 {
+            text-align: center;
+            color: #ff0057;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+            outline: none;
+        }
+        input[type="file"] {
+            margin-bottom: 15px;
+        }
+        input[type="submit"] {
+            background-color: #ff0057;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #ff3369;
+        }
+        .info-text {
+            font-size: 0.9em;
+            color: #cccccc;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Carica la tua Musica</h1>
-        <form onsubmit="submitForm(event)">
-            <label for="nickname">Twitch Nickname:</label>
-            <input type="text" id="nickname" name="nickname" required>
+    <div class="form-container">
+        <h2>Music Submission</h2>
+        <form id="musicForm" enctype="multipart/form-data">
+            <label for="twitchNickname">Twitch Nickname:</label>
+            <input type="text" id="twitchNickname" name="twitchNickname" placeholder="Your Twitch Nickname" required>
 
-            <label for="title">Title Song:</label>
-            <input type="text" id="title" name="title" required>
+            <label for="titleSong">Title Song:</label>
+            <input type="text" id="titleSong" name="titleSong" placeholder="Song Title" required>
 
-            <label for="info">Info Extra:</label>
-            <textarea id="info" name="info" placeholder="Aggiungi informazioni extra..."></textarea>
+            <label for="info">Info:</label>
+            <textarea id="info" name="info" rows="4" placeholder="Song Information" required></textarea>
 
-            <div class="file-upload">
-                <label for="cover">Upload Cover (opzionale):</label>
-                <input type="file" id="cover" name="cover" accept="image/*">
-            </div>
+            <label for="cover">Upload Cover (Optional):</label>
+            <input type="file" id="cover" name="cover" accept="image/*">
 
-            <div class="file-upload">
-                <label for="video">Upload Video (opzionale):</label>
-                <input type="file" id="video" name="video" accept="video/*">
-            </div>
+            <label for="video">Upload Video:</label>
+            <input type="file" id="video" name="video" accept="video/*" required>
 
-            <button type="submit">Invia</button>
+            <input type="submit" value="Submit">
         </form>
+        <div class="info-text">Submit your song details and video!</div>
     </div>
+
+    <script>
+        // Add some visual effects or animations (optional)
+        document.querySelectorAll('input[type="text"], textarea').forEach(input => {
+            input.addEventListener('focus', (e) => {
+                e.target.style.boxShadow = "0 0 5px rgba(255, 0, 100, 0.7)";
+            });
+            input.addEventListener('blur', (e) => {
+                e.target.style.boxShadow = "none";
+            });
+        });
+
+        const form = document.getElementById('musicForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbznUeNmXgr4xjYBoAXkL7BXwpjZ7AHyR4VDkRhCPd3zUsUFzvVMqM5kIc0M-_LxzKk6/exec', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    alert('Form successfully submitted!');
+                } else {
+                    alert('Error submitting the form.');
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
 </body>
 </html>

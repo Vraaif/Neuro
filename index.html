@@ -3,31 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invia Dati Musicali</title>
-    <link rel="stylesheet" href="style.css"> <!-- Includi il file CSS -->
+    <title>Modulo di Caricamento</title>
+    <style>
+        body {
+            background-color: #1e1e2f;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        form {
+            background: #2a2a42;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.5s ease;
+        }
+
+        label {
+            font-size: 1.2rem;
+            display: block;
+            margin: 15px 0 5px;
+        }
+
+        input[type="text"], 
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background: #3a3a5a;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        input[type="text"]:focus, 
+        textarea:focus,
+        input[type="file"]:focus {
+            background: #4a4a7a;
+            outline: none;
+        }
+
+        button {
+            background: #5a5a7a;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #6a6a8a;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .file-upload {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .file-upload input {
+            width: auto;
+            flex: 1;
+        }
+
+        .file-upload label {
+            margin: 0;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Dati inviati con successo!");
+                event.target.reset(); // Reset del modulo
+            })
+            .catch(error => {
+                console.error("Errore:", error);
+                alert("Si è verificato un errore durante l'invio dei dati.");
+            });
+        }
+    </script>
 </head>
 <body>
-    <div class="container">
-        <h1>Invia Dati Musicali</h1>
-        <form id="musicForm">
-            <label for="twitchNickname">Twitch Nickname:</label>
-            <input type="text" id="twitchNickname" required>
+    <h1>Carica i tuoi dati</h1>
+    <form onsubmit="submitForm(event)">
+        <label for="nickname">Twitch Nickname:</label>
+        <input type="text" id="nickname" name="nickname" required>
 
-            <label for="songTitle">Titolo Song:</label>
-            <input type="text" id="songTitle" required>
+        <label for="title">Title Song:</label>
+        <input type="text" id="title" name="title" required>
 
-            <label for="extraInfo">Info Extra:</label>
-            <textarea id="extraInfo"></textarea>
+        <label for="info">Info Extra:</label>
+        <textarea id="info" name="info"></textarea>
 
-            <label for="coverImage">Carica Copertina (opzionale):</label>
-            <input type="file" id="coverImage" accept="image/*">
+        <div class="file-upload">
+            <label for="cover">Upload Cover (opzionale):</label>
+            <input type="file" id="cover" name="cover" accept="image/*">
+        </div>
 
-            <label for="videoFile">Carica Video:</label>
-            <input type="file" id="videoFile" accept="video/*" required>
+        <div class="file-upload">
+            <label for="video">Upload Video (opzionale):</label>
+            <input type="file" id="video" name="video" accept="video/*">
+        </div>
 
-            <button type="submit">Invia</button>
-        </form>
-    </div>
-    <script src="script.js"></script> <!-- Includi il file JavaScript -->
+        <button type="submit">Invia</button>
+    </form>
 </body>
 </html>

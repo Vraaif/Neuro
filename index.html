@@ -100,15 +100,11 @@
 
             const formData = new FormData(form);
 
-            // Make the fetch request with CORS headers
             try {
-                const response = await fetch('https://script.google.com/macros/s/AKfycbznUeNmXgr4xjYBoAXkL7BXwpjZ7AHyR4VDkRhCPd3zUsUFzvVMqM5kIc0M-_LxzKk6/exec', {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbz4DMBtur8LTpIvINokTowLB8Ow_FBT89A3hgr4vNfysv46X3HpgoVO2hRgL243ei3N/exec', {
                     method: 'POST',
                     mode: 'cors',
-                    body: formData,
-                    headers: {
-                        'Access-Control-Allow-Origin': '*'
-                    }
+                    body: formData
                 });
 
                 if (response.ok) {

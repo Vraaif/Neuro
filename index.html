@@ -21,6 +21,10 @@
             padding: 20px;
             width: 400px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            transition: box-shadow 0.3s ease;
+        }
+        .form-container:hover {
+            box-shadow: 0 0 15px rgba(255, 0, 100, 0.7);
         }
         h2 {
             text-align: center;
@@ -29,13 +33,17 @@
         label {
             display: block;
             margin: 10px 0 5px;
+            font-weight: bold;
         }
         input[type="text"], textarea {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
             background-color: #444;
             color: #fff;
+            outline: none;
         }
         input[type="file"] {
             margin-bottom: 15px;
@@ -47,7 +55,17 @@
             width: 100%;
             border: none;
             border-radius: 5px;
+            font-size: 16px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #ff3369;
+        }
+        .info-text {
+            font-size: 0.9em;
+            color: #cccccc;
+            text-align: center;
         }
     </style>
 </head>
@@ -56,31 +74,41 @@
         <h2>Music Submission</h2>
         <form id="musicForm" enctype="multipart/form-data">
             <label for="twitchNickname">Twitch Nickname:</label>
-            <input type="text" id="twitchNickname" name="twitchNickname" required>
+            <input type="text" id="twitchNickname" name="twitchNickname" placeholder="Your Twitch Nickname" required>
+
             <label for="titleSong">Title Song:</label>
-            <input type="text" id="titleSong" name="titleSong" required>
+            <input type="text" id="titleSong" name="titleSong" placeholder="Song Title" required>
+
             <label for="info">Info:</label>
-            <textarea id="info" name="info" required></textarea>
+            <textarea id="info" name="info" rows="4" placeholder="Song Information" required></textarea>
+
             <label for="cover">Upload Cover (Optional):</label>
             <input type="file" id="cover" name="cover" accept="image/*">
+
             <label for="video">Upload Video:</label>
             <input type="file" id="video" name="video" accept="video/*" required>
+
             <input type="submit" value="Submit">
         </form>
+        <div class="info-text">Submit your song details and video!</div>
     </div>
 
     <script>
         const form = document.getElementById('musicForm');
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+
             const formData = new FormData(form);
+
             try {
                 const response = await fetch('https://script.google.com/macros/s/AKfycbz4DMBtur8LTpIvINokTowLB8Ow_FBT89A3hgr4vNfysv46X3HpgoVO2hRgL243ei3N/exec', {
                     method: 'POST',
+                    mode: 'cors',
                     body: formData
                 });
+
                 if (response.ok) {
-                    alert('Form submitted successfully!');
+                    alert('Form successfully submitted!');
                 } else {
                     alert('Error submitting the form.');
                 }

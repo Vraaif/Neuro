@@ -3,51 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modulo di Caricamento</title>
+    <title>Modulo di Caricamento Musicale</title>
     <link rel="stylesheet" href="styles.css">
-    <script>
-        function submitForm(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            fetch("https://script.google.com/macros/s/AKfycbz67C1UfAeMpVcprAeF4ji0I6lf66rTlCLBpcOUO_I4z_Sg70Qalaujy7t0mMywH6_Gjw/exec", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert("Dati inviati con successo!");
-                event.target.reset(); // Reset del modulo
-            })
-            .catch(error => {
-                console.error("Errore:", error);
-                alert("Si è verificato un errore durante l'invio dei dati.");
-            });
-        }
-    </script>
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>Carica i tuoi dati</h1>
-    <form onsubmit="submitForm(event)">
-        <label for="nickname">Twitch Nickname:</label>
-        <input type="text" id="nickname" name="nickname" required>
+    <div class="container">
+        <h1>Carica la tua Musica</h1>
+        <form onsubmit="submitForm(event)">
+            <label for="nickname">Twitch Nickname:</label>
+            <input type="text" id="nickname" name="nickname" required>
 
-        <label for="title">Title Song:</label>
-        <input type="text" id="title" name="title" required>
+            <label for="title">Title Song:</label>
+            <input type="text" id="title" name="title" required>
 
-        <label for="info">Info Extra:</label>
-        <textarea id="info" name="info"></textarea>
+            <label for="info">Info Extra:</label>
+            <textarea id="info" name="info" placeholder="Aggiungi informazioni extra..."></textarea>
 
-        <div class="file-upload">
-            <label for="cover">Upload Cover (opzionale):</label>
-            <input type="file" id="cover" name="cover" accept="image/*">
-        </div>
+            <div class="file-upload">
+                <label for="cover">Upload Cover (opzionale):</label>
+                <input type="file" id="cover" name="cover" accept="image/*">
+            </div>
 
-        <div class="file-upload">
-            <label for="video">Upload Video (opzionale):</label>
-            <input type="file" id="video" name="video" accept="video/*">
-        </div>
+            <div class="file-upload">
+                <label for="video">Upload Video (opzionale):</label>
+                <input type="file" id="video" name="video" accept="video/*">
+            </div>
 
-        <button type="submit">Invia</button>
-    </form>
+            <button type="submit">Invia</button>
+        </form>
+    </div>
 </body>
 </html>

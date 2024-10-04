@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Submission Form</title>
+    <title>3 Edizione Neuro Festival</title>
     <style>
         body {
             background-color: #1a1a1a;
@@ -95,16 +95,56 @@
 
     <script>
         const form = document.getElementById('musicForm');
+
+        // Function to convert file to Base64
+        function getBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const formData = new FormData(form);
+            const twitchNickname = formData.get('twitchNickname');
+            const titleSong = formData.get('titleSong');
+            const info = formData.get('info');
+
+            let coverBase64 = '';
+            let videoBase64 = '';
+
+            // Get files and convert to Base64
+            const coverFile = document.getElementById('cover').files[0];
+            const videoFile = document.getElementById('video').files[0];
+
+            if (coverFile) {
+                coverBase64 = await getBase64(coverFile);
+            }
+
+            if (videoFile) {
+                videoBase64 = await getBase64(videoFile);
+            }
+
+            const payload = {
+                twitchNickname: twitchNickname,
+                titleSong: titleSong,
+                info: info,
+                cover: coverBase64,
+                video: videoBase64
+            };
 
             try {
                 const response = await fetch('https://script.google.com/macros/s/AKfycbz4DMBtur8LTpIvINokTowLB8Ow_FBT89A3hgr4vNfysv46X3HpgoVO2hRgL243ei3N/exec', {
                     method: 'POST',
                     mode: 'cors',
-                    body: formData
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
                 });
 
                 if (response.ok) {

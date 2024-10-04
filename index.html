@@ -94,25 +94,24 @@
     </div>
 
     <script>
-        // Add some visual effects or animations (optional)
-        document.querySelectorAll('input[type="text"], textarea').forEach(input => {
-            input.addEventListener('focus', (e) => {
-                e.target.style.boxShadow = "0 0 5px rgba(255, 0, 100, 0.7)";
-            });
-            input.addEventListener('blur', (e) => {
-                e.target.style.boxShadow = "none";
-            });
-        });
-
         const form = document.getElementById('musicForm');
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            // Prepare FormData to send files as well
             const formData = new FormData(form);
 
+            // Convert the FormData into URL-encoded format
+            const plainFormData = new URLSearchParams();
+            formData.forEach((value, key) => {
+                plainFormData.append(key, value);
+            });
+
+            // Fetch to Google Apps Script endpoint
             try {
                 const response = await fetch('https://script.google.com/macros/s/AKfycbznUeNmXgr4xjYBoAXkL7BXwpjZ7AHyR4VDkRhCPd3zUsUFzvVMqM5kIc0M-_LxzKk6/exec', {
                     method: 'POST',
-                    body: formData
+                    body: plainFormData
                 });
 
                 if (response.ok) {

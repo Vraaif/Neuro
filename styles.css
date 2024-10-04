@@ -1,0 +1,97 @@
+body {
+    background: linear-gradient(135deg, #1d1f24, #2c2e33);
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 3rem;
+    text-align: center;
+    animation: fadeIn 1s ease;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+form {
+    background: rgba(45, 47, 56, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+    animation: slideIn 0.5s ease;
+}
+
+label {
+    font-size: 1.5rem;
+    display: block;
+    margin: 20px 0 10px;
+}
+
+input[type="text"],
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background: #3b3d46;
+    color: #ffffff;
+    font-size: 1.2rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+input[type="file"]:focus {
+    background: #4a4c58;
+    outline: none;
+    transform: scale(1.02);
+}
+
+button {
+    background: #5a5a7a;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background: #6a6a8a;
+    transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.file-upload {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.file-upload input {
+    width: auto;
+    flex: 1;
+}
+
+.file-upload label {
+    margin: 0;
+    font-weight: bold;
+}

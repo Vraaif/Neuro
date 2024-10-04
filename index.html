@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invia Dati Musicali</title>
+    <link rel="stylesheet" href="style.css"> <!-- Includi il file CSS -->
+</head>
+<body>
+    <div class="container">
+        <h1>Invia Dati Musicali</h1>
+        <form id="musicForm">
+            <label for="twitchNickname">Twitch Nickname:</label>
+            <input type="text" id="twitchNickname" required>
+
+            <label for="songTitle">Titolo Song:</label>
+            <input type="text" id="songTitle" required>
+
+            <label for="extraInfo">Info Extra:</label>
+            <textarea id="extraInfo"></textarea>
+
+            <label for="coverImage">Carica Copertina (opzionale):</label>
+            <input type="file" id="coverImage" accept="image/*">
+
+            <label for="videoFile">Carica Video:</label>
+            <input type="file" id="videoFile" accept="video/*" required>
+
+            <button type="submit">Invia</button>
+        </form>
+    </div>
+    <script src="script.js"></script> <!-- Includi il file JavaScript -->
+</body>
+</html>
